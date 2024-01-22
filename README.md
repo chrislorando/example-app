@@ -41,9 +41,9 @@ This repository contains a sample web application build with laravel and livewir
 
 5. **Screenshot**
 
-https://github.com/chrislorando/example-app/assets/10240380/69fe4048-66eb-4684-8593-0ff126608e4f
-https://github.com/chrislorando/example-app/assets/10240380/ca440bdd-a00e-4522-9064-c29d864a1409
-https://github.com/chrislorando/example-app/assets/10240380/d5d7bef1-28a7-4726-850f-8db5b5965139
+![image](https://github.com/chrislorando/example-app/assets/10240380/69fe4048-66eb-4684-8593-0ff126608e4f)
+![image](https://github.com/chrislorando/example-app/assets/10240380/ca440bdd-a00e-4522-9064-c29d864a1409)
+![image](https://github.com/chrislorando/example-app/assets/10240380/d5d7bef1-28a7-4726-850f-8db5b5965139)
 
 ## Contributing
 
