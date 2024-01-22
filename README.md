@@ -2,7 +2,9 @@
 
 ## Introduction
 
-This repository contains a sample web application build with laravel and livewire 3. My goal is to develop simple starter kit with some features like simple authentication and authorization. It's designed to be easy to use, so you can focus on what matters most - your project.
+This repository contains a sample monolith web application build with laravel and livewire 3. My goal is to develop simple starter kit with some features like authentication, authorization and other helper features. It's designed to be easy to use and easy to develop.
+
+This repo and code is still a bit messy, but no problem, it works :)
 
 ## Features
 
@@ -58,7 +60,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 If you have any questions or feedback, please feel free to contact me.
 
 Happy coding!
-
-```
-
-```
