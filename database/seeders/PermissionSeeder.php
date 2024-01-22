@@ -63,7 +63,15 @@ class PermissionSeeder extends Seeder
             ['id'=>39, 'uuid'=>Str::uuid(), 'guard_name'=>'web', 'name'=>'system.country.update', 'alias'=>null, 'controller'=>'App\Livewire\System\Country', 'action'=>'update', 'description'=>'Country update action'],
             ['id'=>40, 'uuid'=>Str::uuid(), 'guard_name'=>'web', 'name'=>'system.country.delete', 'alias'=>null, 'controller'=>'App\Livewire\System\Country', 'action'=>'delete', 'description'=>'Country delete action'],
             ['id'=>41, 'uuid'=>Str::uuid(), 'guard_name'=>'web', 'name'=>'system.country.deletePhoto', 'alias'=>null, 'controller'=>'App\Livewire\System\Country', 'action'=>'deletePhoto', 'description'=>'Country delete photo action'],
-            ['id'=>42, 'uuid'=>Str::uuid(), 'guard_name'=>'web', 'name'=>'system.country.restore', 'alias'=>null, 'controller'=>'App\Livewire\System\Country', 'action'=>'restore', 'description'=>'Country restore photo action'],
+            ['id'=>42, 'uuid'=>Str::uuid(), 'guard_name'=>'web', 'name'=>'system.country.restore', 'alias'=>null, 'controller'=>'App\Livewire\System\Country', 'action'=>'restore', 'description'=>'Country restore action'],
+
+            ['id'=>43, 'uuid'=>Str::uuid(), 'guard_name'=>'web', 'name'=>'system.translate.index', 'alias'=>'system/translate', 'controller'=>'App\Livewire\System\Translate', 'action'=>'index', 'description'=>'Translate management page'],
+            ['id'=>44, 'uuid'=>Str::uuid(), 'guard_name'=>'web', 'name'=>'system.translate.create', 'alias'=>null, 'controller'=>'App\Livewire\System\Translate', 'action'=>'create', 'description'=>'Translate create action'],
+            ['id'=>45, 'uuid'=>Str::uuid(), 'guard_name'=>'web', 'name'=>'system.translate.store', 'alias'=>null, 'controller'=>'App\Livewire\System\Translate', 'action'=>'store', 'description'=>'Translate store action'],
+            ['id'=>46, 'uuid'=>Str::uuid(), 'guard_name'=>'web', 'name'=>'system.translate.edit', 'alias'=>null, 'controller'=>'App\Livewire\System\Translate', 'action'=>'edit', 'description'=>'Translate edit action'],
+            ['id'=>47, 'uuid'=>Str::uuid(), 'guard_name'=>'web', 'name'=>'system.translate.update', 'alias'=>null, 'controller'=>'App\Livewire\System\Translate', 'action'=>'update', 'description'=>'Translate update action'],
+            ['id'=>48, 'uuid'=>Str::uuid(), 'guard_name'=>'web', 'name'=>'system.translate.delete', 'alias'=>null, 'controller'=>'App\Livewire\System\Translate', 'action'=>'delete', 'description'=>'Translate delete action'],
+            ['id'=>49, 'uuid'=>Str::uuid(), 'guard_name'=>'web', 'name'=>'system.translate.restore', 'alias'=>null, 'controller'=>'App\Livewire\System\Translate', 'action'=>'restore', 'description'=>'Translate restore action'],
 
         ];
         

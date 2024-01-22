@@ -36,6 +36,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/system/permission', 'App\Livewire\System\Permission'::class);
     Route::get('/system/menu', 'App\Livewire\System\Menu'::class);
     Route::get('/system/country', 'App\Livewire\System\Country'::class);
+    Route::get('/system/translate', 'App\Livewire\System\Translate'::class);
     Route::post('/logout', 'App\Livewire\Auth\Login'::class)->name('logout');
 });
 

@@ -20,12 +20,16 @@ return [
     'permission'=> 'Izin',
     'menu'=> 'Menu',
     'country'=> 'Bahasa',
+    'translate'=> 'Terjemahan',
+    'locale'=>'Lokal',
+    'value'=>'Arti',
 
     "manage_user"=> "Manajemen Pengguna",
     "manage_role"=> "Manajemen Jabatan",
     "manage_permission"=> "Manajemen Izin",
     "manage_menu"=> "Manajemen Menu",
     "manage_language"=> "Manajemen Bahasa",
+    "manage_translate"=> "Manajemen Terjemahan",
 
     'save'=>'Simpan',
     'close'=>'Tutup',

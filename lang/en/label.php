@@ -19,12 +19,16 @@ return [
     'permission'=> 'Permission',
     'menu'=> 'Menu',
     'country'=> 'Language',
+    'translate'=> 'Translate',
+    'locale'=>'Locale',
+    'value'=>'Value',
 
     "manage_user"=> "Manage User",
     "manage_role"=> "Manage Role",
     "manage_permission"=> "Manage Permission",
     "manage_menu"=> "Manage Menu",
     "manage_language"=> "Manage Language",
+    "manage_translate"=> "Manage Translate",
 
     'save'=>'Save',
     'close'=>'Close',

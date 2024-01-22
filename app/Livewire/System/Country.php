@@ -18,6 +18,8 @@ class Country extends Component
     use WithFileUploads;
 
     public $layout = "components.layouts.app";
+
+    public $view = "livewire.system.country";
     public $pageTitle = "label.country";
 
     // #[Url(keep: true)] 
@@ -260,13 +262,13 @@ class Country extends Component
     {
         $this->authorize($this->authorization['index']);
 
-        $countries = CountryModel::select("*")->when($this->is_deleted_q!="", function ($query)  {
+        $countries = CountryModel::withTrashed()->select("*")->when($this->is_deleted_q!="", function ($query)  {
             $query->where('is_deleted',$this->is_deleted_q);
         });
 
         $models = $countries->orderBy($this->sortField, $this->sortDirection)->paginate($this->perPage);
 
-        return view('livewire.system.country', [
+        return view($this->view, [
             'models' => $models,
         ])
         ->title(__($this->pageTitle))
