@@ -3,11 +3,8 @@
 namespace App\Livewire\System;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Http\Request;
-use Livewire\Attributes\Layout;
 use Livewire\WithPagination;
 use Livewire\Component;
-use App\Helpers\Helper;
 use Illuminate\Support\Str;
 use App\Models\Role AS RoleModel;
 use App\Models\Permission AS PermissionModel;
@@ -77,7 +74,7 @@ class Role extends Component
         return [
             'name' => [
                 'required',
-                Rule::unique('roles')->ignore($this->name)
+                Rule::unique('roles')->ignore($this->id)
             ],
             'guard_name' => [
                 'required',
@@ -104,7 +101,7 @@ class Role extends Component
         $this->dispatch('close-modal'); 
 
         if($reload){
-            return $this->redirect('/system/user', navigate: true);
+            return $this->redirect('/system/role', navigate: true);
         }
     }
 
@@ -143,12 +140,12 @@ class Role extends Component
         $model = RoleModel::create($data);
 
         if($model){
-            session()->flash('message', "Data successfully created.");
+            session()->flash('message', __('message.success_create'));
             $this->q = $this->name;
             $this->isFormOpen = false;
             $this->dispatch('close-modal');         
         }else{
-            session()->flash('error', 'Data cannot be created.');
+            session()->flash('error', __('message.error_create'));
         }
 
  
@@ -200,12 +197,12 @@ class Role extends Component
         $model = RoleModel::withTrashed()->find($this->id)->update($data);
 
         if($model){
-            session()->flash('message', "Data successfully updated.");
+            session()->flash('message', __('message.success_update'));
             $this->q = $this->name;
             $this->isFormOpen = false;
             $this->dispatch('close-modal');        
         }else{
-            session()->flash('error', 'Data cannot be updated.');
+            session()->flash('error', __('message.success_update'));
         }
     }
 
@@ -218,6 +215,8 @@ class Role extends Component
         $model->is_deleted = '0';
         $model->save();
         $model->restore();
+
+        session()->flash('message', __('message.success_restore'));
     }
 
     public function delete($id)
@@ -233,6 +232,8 @@ class Role extends Component
             $model->save();
             $model->delete();
         }
+
+        session()->flash('message', __('message.success_delete'));
         
     }
 
@@ -270,7 +271,7 @@ class Role extends Component
         
             \DB::commit();
 
-            session()->flash('message', "Data successfully copied.");
+            session()->flash('message', __('message.success_created'));
         
         } catch (\Throwable $e) {
             \DB::rollback();
@@ -331,10 +332,11 @@ class Role extends Component
         // dd($role);
         if (!$isExists) {
             $role->permissions()->attach($permission_id, ['uuid' => Str::uuid()]);
-            session()->flash('message', "Permission added.");
+            session()->flash('message', __('message.success_assign_permission'));
+            
         } else {
             $role->permissions()->detach($permission_id);
-            session()->flash('error', "Permission removed.");
+            session()->flash('error', __('message.success_remove_permission'));
         }
     }
    

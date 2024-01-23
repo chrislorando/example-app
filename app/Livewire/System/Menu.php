@@ -149,12 +149,12 @@ class Menu extends Component
         $model = MenuModel::create($data);
 
         if($model){
-            session()->flash('message', "Data successfully created.");
+            session()->flash('message', __('message.success_create'));
             $this->q = $this->name;
             $this->isFormOpen = false;
             $this->dispatch('close-modal');         
         }else{
-            session()->flash('error', 'Data cannot be created.');
+            session()->flash('error', __('message.error_create'));
         }
 
  
@@ -171,7 +171,7 @@ class Menu extends Component
 
         $this->isNewRecord = false;
 
-        $model = MenuModel::withTrashed()->find($this->id);
+        $model = MenuModel::withTrashed()->find($id);
         
         $this->id = $model->id;
         $this->uuid = $model->uuid;
@@ -215,12 +215,12 @@ class Menu extends Component
         $model = MenuModel::withTrashed()->find($this->id)->update($data);
 
         if($model){
-            session()->flash('message', "Data successfully updated.");
+            session()->flash('message', __('message.success_update'));
             $this->q = $this->name;
             $this->isFormOpen = false;
             $this->dispatch('close-modal');        
         }else{
-            session()->flash('error', 'Data cannot be updated.');
+            session()->flash('error', __('message.error_update'));
         }
     }
 
@@ -233,6 +233,8 @@ class Menu extends Component
         $model->is_deleted = '0';
         $model->save();
         $model->restore();
+
+        session()->flash('message', __('message.success_restore'));
     }
 
     public function delete($id)
@@ -248,6 +250,8 @@ class Menu extends Component
             $model->save();
             $model->delete();
         }
+
+        session()->flash('message', __('message.success_delete'));
         
     }
    
@@ -284,7 +288,7 @@ class Menu extends Component
 
         $optionsPermission = [];
         if($this->url){
-            $modelPermission = PermissionModel::withTrashed()->select("*")->when($this->url!="", function ($query)  {
+            $modelPermission = PermissionModel::select("*")->when($this->url!="", function ($query)  {
                 $query->whereNotNull('alias');
                 $query->where(function($query){
                     $query

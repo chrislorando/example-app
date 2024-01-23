@@ -20,9 +20,9 @@ class Country extends Model
 
     public function getIsActiveText() {
         if($this->is_deleted==0){
-            return 'Active';
+            return 'No';
         }else if($this->is_deleted==1){
-            return 'Deleted';
+            return 'Yes';
         }else{
             return '';
         }

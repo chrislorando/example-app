@@ -21,7 +21,7 @@
                     <input type="text" class="form-control" placeholder="{{ __('label.search') }}..." aria-label="Search" wire:model="q">
 
                     <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
-                    <button class="btn btn-primary" type="button" wire:click="$refresh"><i class="bi bi-arrow-clockwise"></i></button>
+                    <button class="btn btn-primary" type="button" wire:click="$refresh"><i class="bi bi-arrow-repeat"></i></button>
                 </div>
             </form>
         </div>
@@ -90,7 +90,7 @@
                     @else
                         <tr>
                             <td colspan="7" class="text-center">
-                                {{ __('label.not_data_found') }}
+                                {{ __('label.data_not_found') }}
                             </td>
                         </tr>
                     @endif

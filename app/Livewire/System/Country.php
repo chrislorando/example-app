@@ -139,12 +139,12 @@ class Country extends Component
         $model = CountryModel::create($data);
 
         if($model){
-            session()->flash('message', "Data successfully created.");
+            session()->flash('message', __('message.success_create'));
             $this->q = $this->name;
             $this->isFormOpen = false;
             $this->dispatch('close-modal');         
         }else{
-            session()->flash('error', 'Data cannot be created.');
+            session()->flash('message', __('message.error_create'));
         }
 
  
@@ -199,13 +199,13 @@ class Country extends Component
         $model = CountryModel::where('uuid', $this->uuid)->update($data);
 
         if($model){
-            session()->flash('message', "Data successfully updated.");
+            session()->flash('message', __('message.success_update'));
             // $this->reset();
             $this->q = $this->name;
             $this->isFormOpen = false;
             $this->dispatch('close-modal');        
         }else{
-            session()->flash('error', 'Data cannot be updated.');
+            session()->flash('message', __('message.error_update'));
         }
     }
 
@@ -218,6 +218,8 @@ class Country extends Component
         $model->is_deleted = '0';
         $model->save();
         $model->restore();
+
+        session()->flash('message', __('message.success_restore'));
     }
 
     public function delete($id)
@@ -233,6 +235,8 @@ class Country extends Component
             $model->save();
             $model->delete();
         }
+
+        session()->flash('message', __('message.success_delete'));
         
     }
     
@@ -264,6 +268,11 @@ class Country extends Component
 
         $countries = CountryModel::withTrashed()->select("*")->when($this->is_deleted_q!="", function ($query)  {
             $query->where('is_deleted',$this->is_deleted_q);
+        });
+
+        $countries->where(function ($query) {
+            $query->where('code','like', '%' . $this->q . '%')
+            ->orWhere('name','like', '%' . $this->q . '%');
         });
 
         $models = $countries->orderBy($this->sortField, $this->sortDirection)->paginate($this->perPage);

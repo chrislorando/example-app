@@ -94,7 +94,7 @@
                     @else
                         <tr>
                             <td colspan="7" class="text-center">
-                                {{ __('label.not_data_found') }}
+                                {{ __('label.data_not_found') }}
                             </td>
                         </tr>
                     @endif

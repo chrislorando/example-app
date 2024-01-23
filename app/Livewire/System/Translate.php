@@ -9,6 +9,7 @@ use Livewire\WithPagination;
 use App\Helpers\Helper;
 use Illuminate\Support\Str;
 use App\Models\Translate AS TranslateModel;
+use App\Models\Country AS CountryModel;
 use Illuminate\Validation\Rule;
 
 class Translate extends Component
@@ -25,7 +26,7 @@ class Translate extends Component
     // #[Url(keep: true)] 
     public $q = "";
     public $is_deleted_q;
-    public $sortField = "id";
+    public $sortField = "code";
     public $sortDirection = "asc";
     public $perPage = 10;
 
@@ -38,7 +39,8 @@ class Translate extends Component
         'edit'=>'system.translate.edit',
         'update'=>'system.translate.update',
         'delete'=>'system.translate.delete',
-        'restore'=>'system.translate.restore'
+        'restore'=>'system.translate.restore',
+        'publish'=>'system.translate.publish'
     ];
 
 
@@ -67,7 +69,10 @@ class Translate extends Component
             'code' => [
                 'required',
                 'min:2',
-                Rule::unique('translates')->ignore($this->id)
+                Rule::unique('translates')->where(function ($query) {
+                    return $query->where('locale', $this->locale)
+                       ->where('value', $this->code);
+                })->ignore($this->id)
             ],
             'value' => 'required',
             'locale' => 'required',
@@ -126,12 +131,12 @@ class Translate extends Component
         $model = TranslateModel::create($data);
 
         if($model){
-            session()->flash('message', "Data successfully created.");
+            session()->flash('message', __('message.success_create'));
             $this->q = $this->code;
             $this->isFormOpen = false;
             $this->dispatch('close-modal');         
         }else{
-            session()->flash('error', 'Data cannot be created.');
+            session()->flash('message', __('message.error_create'));
         }
 
  
@@ -174,13 +179,13 @@ class Translate extends Component
         $model = TranslateModel::withTrashed()->find($this->id)->update($data);
 
         if($model){
-            session()->flash('message', "Data successfully updated.");
+            session()->flash('message', __('message.success_update'));
             // $this->reset();
             $this->q = $this->code;
             $this->isFormOpen = false;
             $this->dispatch('close-modal');        
         }else{
-            session()->flash('error', 'Data cannot be updated.');
+            session()->flash('message', __('message.error_update'));
         }
     }
 
@@ -193,6 +198,8 @@ class Translate extends Component
         $model->is_deleted = '0';
         $model->save();
         $model->restore();
+
+        session()->flash('message', __('message.success_restore'));
     }
 
     public function delete($id)
@@ -209,23 +216,78 @@ class Translate extends Component
             $model->delete();
         }
         
+        session()->flash('message', __('message.success_delete'));
+    }
+
+    public function publish()
+    {
+        $this->authorize($this->authorization['publish']);
+
+        $array = [];
+        $translates = TranslateModel::get();
+
+        foreach($translates as $translate){
+            $array[$translate->locale][$translate->group][$translate->code] = $translate->value;
+        }
+
+        foreach($array as $key=>$row){
+
+            foreach($row as $k=>$r){
+                $dir = base_path() . '/lang/'.$key.'/';
+                $filename = base_path() . '/lang/'.$key.'/'.$k.'.php';
+
+                if (!is_dir($dir)) {
+                    mkdir($dir, 0755);
+                }else{
+                    $array_string = Helper::var_export_custom($r, true);
+                    file_put_contents($filename, "<?php\n\n\rreturn $array_string;\n\n");
+
+                }
+            }   
+        }
+
+        session()->flash('message', __('message.published'));
     }
     
-    public function consume(){
-        $strarray = include(base_path() . '/lang/en/validation.php');
-        $array = [];
-        foreach($strarray as $key=>$row){
-            $array[] = [
-                'uuid'=> Str::uuid(),
-                'locale'=>'en',
-                'group'=>'label',
-                'code'=>$key,
-                'value'=>$row,
-            ];
-        }
-        TranslateModel::insert($array);
-        // dd($array);
-    }
+    // public function consume(){
+
+    //     $locale = 'id';
+    //     $group = 'validation';
+
+    //     $strarray = include(base_path() . '/lang/'.$locale.'/'.$group.'.php');
+    //     $array = [];
+    //     foreach($strarray as $key=>$row){
+
+    //         if(is_countable($row)){
+    //             foreach($row as $k=>$r){
+    //                 $isExists = TranslateModel::where('locale',$locale)->where('code',$key.'_'.$k)->count();
+    //                 if($isExists <= 0){
+    //                     $array[] = [
+    //                         'uuid'=> Str::uuid(),
+    //                         'locale'=> $locale,
+    //                         'group'=> $group,
+    //                         'code'=> $key.'_'.$k,
+    //                         'value'=> $r,
+    //                     ];
+    //                 }
+                 
+    //             }
+    //         }else{
+    //             $isExists = TranslateModel::where('locale',$locale)->where('code',$key)->count();
+    //             if($isExists <= 0){
+    //                 $array[] = [
+    //                     'uuid'=> Str::uuid(),
+    //                     'locale'=> $locale,
+    //                     'group'=> $group,
+    //                     'code'=> $key,
+    //                     'value'=>$row,
+    //                 ];
+    //             }
+            
+    //         }
+    //     }
+    //     TranslateModel::insert($array);
+    // }
 
     public function search()
     {
@@ -236,13 +298,30 @@ class Translate extends Component
     {
         $this->authorize($this->authorization['index']);
 
-        $countries = TranslateModel::withTrashed()->select("*")->when($this->is_deleted_q!="", function ($query)  {
+        $translates = TranslateModel::withTrashed()->select("*")->when($this->is_deleted_q!="", function ($query)  {
             $query->where('is_deleted',$this->is_deleted_q);
         });
 
-        $models = $countries->orderBy($this->sortField, $this->sortDirection)->paginate($this->perPage);
+        $translates->where(function ($query) {
+            $query->where('locale','like', '%' . $this->q . '%')
+            ->orWhere('group','like', '%' . $this->q . '%')
+            ->orWhere('code','like', '%' . $this->q . '%')
+            ->orWhere('value','like', '%' . $this->q . '%');
+        });
+
+        $models = $translates->orderBy($this->sortField, $this->sortDirection)->paginate($this->perPage);
+
+        $countryModel = CountryModel::get();
+        $countries = [];
+        foreach($countryModel as $r){
+            $countries[] = [
+                'value'=> $r->code,
+                'text'=> $r->name
+            ];
+        }
 
         return view($this->view, [
+            'countries'=>$countries,
             'models' => $models,
         ])
         ->title(__($this->pageTitle))

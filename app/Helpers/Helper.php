@@ -65,4 +65,18 @@ class Helper
             }
         }
     }
+
+    public static function var_export_custom($expression, $return=false) {
+        $export = var_export($expression, true);
+        $patterns = [
+            "/array \(/" => '[',
+            "/^([ ]*)\)(,?)$/m" => '$1]$2',
+        ];
+        $output = preg_replace(array_keys($patterns), array_values($patterns), $export);
+        if ($return) {
+            return $output;
+        } else {
+            echo $output;
+        }
+    }
 }

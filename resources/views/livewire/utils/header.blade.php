@@ -71,14 +71,14 @@
                 <li>
                   <button type="button" class="dropdown-item" data-bs-theme-value="light" aria-pressed="false">
                     <i class="bi bi-brightness-high-fill text-warning"></i>
-                    Light
+                    {{ __('label.light') }}
                   </button>
                 
                 </li>
                 <li>
                   <button type="button" class="dropdown-item" data-bs-theme-value="dark" aria-pressed="false">
                     <i class="bi bi-moon-stars-fill me-1"></i>
-                    Dark
+                    {{ __('label.dark') }}
                   </button>
                 </li>
             </ul>
@@ -101,7 +101,7 @@
                   onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
                   <i class="bi bi-power text-danger"></i>
-                    {{ __('Logout') }}
+                    {{ __('label.logout') }}
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf

@@ -74,6 +74,7 @@ class User extends Component
     public $is_deleted;
 
     protected array $rules = [];
+    
     protected function rules() 
     {
         return [
@@ -161,12 +162,12 @@ class User extends Component
         $model = UserModel::create($data);
 
         if($model){
-            session()->flash('message', "Data successfully created.");
+            session()->flash('message', __('message.success_create'));
             $this->q = $this->username;
             $this->isFormOpen = false;
             $this->dispatch('close-modal');         
         }else{
-            session()->flash('error', 'Data cannot be created.');
+            session()->flash('error', __('message.error_create'));
         }
 
  
@@ -234,13 +235,13 @@ class User extends Component
         $model = UserModel::withTrashed()->find($this->id)->update($data);
 
         if($model){
-            session()->flash('message', "Data successfully updated.");
+            session()->flash('message', __('message.success_update'));
             // $this->reset();
             $this->q = $this->username;
             $this->isFormOpen = false;
             $this->dispatch('close-modal');        
         }else{
-            session()->flash('error', 'Data cannot be updated.');
+            session()->flash('error', __('message.error_update'));
         }
     }
 
@@ -257,6 +258,8 @@ class User extends Component
             $model->save();
             $model->delete();
         }
+
+        session()->flash('message', __('message.success_delete'));
     }
 
     public function restore($id)
@@ -268,6 +271,8 @@ class User extends Component
         $model->is_deleted = '0';
         $model->save();
         $model->restore();
+
+        session()->flash('message', __('message.success_restore'));
     }
     
     public function deletePhoto(UserModel $model)

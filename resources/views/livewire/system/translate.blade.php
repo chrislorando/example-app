@@ -9,8 +9,10 @@
                 <button type="button" class="btn btn-primary" wire:loading.attr="disabled" wire:click="create"><i class="bi bi-plus-lg"></i> {{ __('label.create') }}</button>
             @endcan
 
-            <button type="button" class="btn btn-primary" wire:loading.attr="disabled" wire:click="consume"><i class="bi bi-plus-lg"></i> Consume</button>
-
+            @can($authorization['publish'])
+                <button type="button" class="btn btn-success" wire:loading.attr="disabled" wire:click="publish"><i class="bi bi-file-earmark-arrow-up-fill"></i> Publish</button>
+            @endcan
+            {{-- <button type="button" class="btn btn-primary" wire:loading.attr="disabled" wire:click="consume"><i class="bi bi-plus-lg"></i> Consume</button> --}}
             
         </div>
         <div class="ms-auto">
@@ -24,7 +26,7 @@
                     <input type="text" class="form-control" placeholder="{{ __('label.search') }}..." aria-label="Search" wire:model="q">
 
                     <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
-                    <button class="btn btn-primary" type="button" wire:click="$refresh"><i class="bi bi-arrow-clockwise"></i></button>
+                    <button class="btn btn-primary" type="button" wire:click="$refresh"><i class="bi bi-arrow-repeat"></i></button>
                 </div>
             </form>
         </div>
@@ -66,11 +68,11 @@
                                 <th scope="row" class="text-center">{{ $count }}</th>
                                 <td class="text-nowrap text-center">
                                     @can($authorization['delete'])
-                                        <button type="button" class="btn btn-sm btn-danger" title="{{ __('label.delete') }}" wire:loading.attr="disabled" wire:click="delete({{ $row->id }})" wire:confirm="Are you sure want to {{ $row->trashed() ? 'permantly' : '' }} delete {{$row->name}} ?"><i class="bi bi-trash3-fill"></i></button>
+                                        <button type="button" class="btn btn-sm btn-danger" title="{{ __('label.delete') }}" wire:loading.attr="disabled" wire:click="delete({{ $row->id }})" wire:confirm="Are you sure want to {{ $row->trashed() ? 'permantly' : '' }} delete {{$row->code}} ?"><i class="bi bi-trash3-fill"></i></button>
                                     @endcan
                                     @can($authorization['restore'])
                                         @if($row->trashed())
-                                            <button type="button" class="btn btn-success btn-sm" title="{{ __('label.restore') }}" wire:loading.attr="disabled" wire:click="restore({{ $row->id }})" wire:confirm="Are you sure want to restore {{$row->name}} ?"><i class="bi bi-arrow-counterclockwise"></i></button>
+                                            <button type="button" class="btn btn-success btn-sm" title="{{ __('label.restore') }}" wire:loading.attr="disabled" wire:click="restore({{ $row->id }})" wire:confirm="Are you sure want to restore {{$row->code}} ?"><i class="bi bi-arrow-counterclockwise"></i></button>
                                         @endif
                                     @endcan
                                     @can($authorization['edit'])
@@ -91,7 +93,7 @@
                     @else
                         <tr>
                             <td colspan="7" class="text-center">
-                                {{ __('label.not_data_found') }}
+                                {{ __('label.data_not_found') }}
                             </td>
                         </tr>
                     @endif
@@ -125,15 +127,16 @@
                           
                             <div class="mb-3">
                                 <label for="locale" class="form-label">{{ __('label.locale') }}</label>
-                                <x-input.input-text type="text" id="locale" name="locale" placeholder="en" wire:model="locale" /> 
+                                <x-input.input-select :data="$countries" id="locale" name="locale" placeholder="en" wire:model="locale" />
                             </div>
+
                             <div class="mb-3">
                                 <label for="code" class="form-label">{{ __('label.group') }}</label>
                                 <x-input.input-text type="text" id="group" name="group" placeholder="label" wire:model="group" /> 
                             </div>
                             <div class="mb-3">
                                 <label for="code" class="form-label">{{ __('label.code') }}</label>
-                                <x-input.input-text type="text" id="name" name="name" placeholder="hello" wire:model="code" /> 
+                                <x-input.input-text type="text" id="code" name="code" placeholder="hello" wire:model="code" /> 
                             </div>
                             <div class="mb-3">
                                 <label for="name" class="form-label">{{ __('label.value') }}</label>

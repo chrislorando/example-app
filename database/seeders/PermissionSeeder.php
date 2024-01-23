@@ -72,6 +72,7 @@ class PermissionSeeder extends Seeder
             ['id'=>47, 'uuid'=>Str::uuid(), 'guard_name'=>'web', 'name'=>'system.translate.update', 'alias'=>null, 'controller'=>'App\Livewire\System\Translate', 'action'=>'update', 'description'=>'Translate update action'],
             ['id'=>48, 'uuid'=>Str::uuid(), 'guard_name'=>'web', 'name'=>'system.translate.delete', 'alias'=>null, 'controller'=>'App\Livewire\System\Translate', 'action'=>'delete', 'description'=>'Translate delete action'],
             ['id'=>49, 'uuid'=>Str::uuid(), 'guard_name'=>'web', 'name'=>'system.translate.restore', 'alias'=>null, 'controller'=>'App\Livewire\System\Translate', 'action'=>'restore', 'description'=>'Translate restore action'],
+            ['id'=>50, 'uuid'=>Str::uuid(), 'guard_name'=>'web', 'name'=>'system.translate.publish', 'alias'=>null, 'controller'=>'App\Livewire\System\Publish', 'action'=>'publish', 'description'=>'Translate publish action'],
 
         ];
         

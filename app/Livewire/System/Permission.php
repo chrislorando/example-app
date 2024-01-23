@@ -143,12 +143,13 @@ class Permission extends Component
         $model = PermissionModel::create($data);
 
         if($model){
-            session()->flash('message', "Data successfully created.");
+            session()->flash('message', __('message.success_create'));
+
             $this->q = $this->name;
             $this->isFormOpen = false;
             $this->dispatch('close-modal');         
         }else{
-            session()->flash('error', 'Data cannot be created.');
+            session()->flash('error', __('message.error_create'));
         }
 
  
@@ -199,12 +200,12 @@ class Permission extends Component
         $model = PermissionModel::where('uuid', $this->uuid)->update($data);
 
         if($model){
-            session()->flash('message', "Data successfully updated.");
+            session()->flash('message', __('message.success_update'));
             $this->q = $this->name;
             $this->isFormOpen = false;
             $this->dispatch('close-modal');        
         }else{
-            session()->flash('error', 'Data cannot be updated.');
+            session()->flash('error', __('message.error_update'));
         }
     }
 
@@ -213,6 +214,8 @@ class Permission extends Component
         $this->authorize($this->authorization['delete']);
 
         $model->delete();
+
+        session()->flash('message', __('message.success_delete'));
     }
    
     public function search()
@@ -293,7 +296,7 @@ class Permission extends Component
             }
         }
 
-        session()->flash('message', "Data successfully created.");
+        session()->flash('message', __('message.success_create'));
     
     }
 
