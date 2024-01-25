@@ -74,5 +74,6 @@
   'backup' => 'Backup',
   'already_register' => 'Already Register?',
   'profile' => 'Profile',
+  'account' => 'Account',
 ];
 

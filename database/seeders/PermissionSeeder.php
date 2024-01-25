@@ -75,6 +75,10 @@ class PermissionSeeder extends Seeder
             ['id'=>50, 'uuid'=>Str::uuid(), 'guard_name'=>'web', 'name'=>'system.translate.publish', 'alias'=>null, 'controller'=>'App\Livewire\System\Translate', 'action'=>'publish', 'description'=>'Translate publish action'],
             ['id'=>51, 'uuid'=>Str::uuid(), 'guard_name'=>'web', 'name'=>'system.translate.backup', 'alias'=>null, 'controller'=>'App\Livewire\System\Translate', 'action'=>'backup', 'description'=>'Translate backup action'],
 
+            ['id'=>52, 'uuid'=>Str::uuid(), 'guard_name'=>'web', 'name'=>'account.profile.index', 'alias'=>null, 'controller'=>'App\Livewire\Account\Profile', 'action'=>'index', 'description'=>'Profile management page'],
+            ['id'=>53, 'uuid'=>Str::uuid(), 'guard_name'=>'web', 'name'=>'account.profile.update', 'alias'=>null, 'controller'=>'App\Livewire\Account\Profile', 'action'=>'update', 'description'=>'Profile update action'],
+            ['id'=>54, 'uuid'=>Str::uuid(), 'guard_name'=>'web', 'name'=>'account.profile.deletePhoto', 'alias'=>null, 'controller'=>'App\Livewire\Account\Profile', 'action'=>'deletePhoto', 'description'=>'Profile delete photo action'],
+            ['id'=>55, 'uuid'=>Str::uuid(), 'guard_name'=>'web', 'name'=>'account.profile.updatePassword', 'alias'=>null, 'controller'=>'App\Livewire\Account\Profile', 'action'=>'updatePassword', 'description'=>'Profile update password action'],
         ];
         
         Permission::insert($data);

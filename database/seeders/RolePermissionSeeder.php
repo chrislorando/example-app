@@ -67,6 +67,10 @@ class RolePermissionSeeder extends Seeder
             ['permission_id'=>49, 'role_id'=>1, 'uuid'=>Str::uuid()],
             ['permission_id'=>50, 'role_id'=>1, 'uuid'=>Str::uuid()],
             ['permission_id'=>51, 'role_id'=>1, 'uuid'=>Str::uuid()],
+            ['permission_id'=>52, 'role_id'=>1, 'uuid'=>Str::uuid()],
+            ['permission_id'=>53, 'role_id'=>1, 'uuid'=>Str::uuid()],
+            ['permission_id'=>54, 'role_id'=>1, 'uuid'=>Str::uuid()],
+            ['permission_id'=>55, 'role_id'=>1, 'uuid'=>Str::uuid()],
 
             ['permission_id'=>1, 'role_id'=>2, 'uuid'=>Str::uuid()],
             ['permission_id'=>2, 'role_id'=>2, 'uuid'=>Str::uuid()],

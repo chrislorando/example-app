@@ -28,13 +28,13 @@
                         @yield('message')
                     </div>
 
-                    <div class="px-4 text-lg text-gray-500 border-r border-gray-400 uppercase tracking-wider">
+                    <div class="px-4 text-lg text-gray-500 uppercase tracking-wider">
                         <a href="{{ url('/') }}">
                             {{ __('label.home') }}
                         </a>
                     </div>
 
-                    <div class="px-4 text-lg text-gray-500 uppercase tracking-wider">
+                    {{-- <div class="px-4 text-lg text-gray-500 uppercase tracking-wider">
                         <a href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
@@ -43,7 +43,7 @@
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                         </form>
-                    </div>
+                    </div> --}}
 
                 </div>
           

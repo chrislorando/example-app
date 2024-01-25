@@ -62,11 +62,11 @@
                                 <th scope="row" class="text-center">{{ $count }}</th>
                                 <td class="text-center">
                                     @can($authorization['delete'])
-                                        <button type="button" class="btn btn-sm btn-danger" title="{{ __('label.delete') }}" wire:loading.attr="disabled" wire:click="delete({{ $row->id }})" wire:confirm="Are you sure want to {{ $row->trashed() ? 'permantly' : '' }} delete {{$row->name}} ?"><i class="bi bi-trash3-fill"></i></button>
+                                        <button type="button" class="btn btn-sm btn-danger" title="{{ __('label.delete') }}" wire:loading.attr="disabled" wire:click="delete({{ $row->id }})" wire:confirm="{{ $row->trashed() ? __('confirm.force_delete', ['name' => $row->name]) : __('confirm.delete', ['name' => $row->name]) }}"><i class="bi bi-trash3-fill"></i></button>
                                     @endcan
                                     @can($authorization['restore'])
                                         @if($row->trashed())
-                                            <button type="button" class="btn btn-success btn-sm" title="{{ __('label.restore') }}" wire:loading.attr="disabled" wire:click="restore({{ $row->id }})" wire:confirm="Are you sure want to restore {{$row->name}} ?"><i class="bi bi-arrow-counterclockwise"></i></button>
+                                            <button type="button" class="btn btn-success btn-sm" title="{{ __('label.restore') }}" wire:loading.attr="disabled" wire:click="restore({{ $row->id }})" wire:confirm="{{ __('confirm.restore', ['name' => $row->name]) }}"><i class="bi bi-arrow-counterclockwise"></i></button>
                                         @endif
                                     @endcan
                                     @can($authorization['edit'])

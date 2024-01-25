@@ -21,7 +21,6 @@ class User extends Component
     use WithFileUploads;
 
     public $layout = "components.layouts.app";
-
     public $view = "livewire.system.user";
     public $pageTitle = "label.user";
 

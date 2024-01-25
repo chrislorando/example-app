@@ -15,7 +15,7 @@
           @foreach($models as $row)
             @if($row->parent==null && count($row->children->where('position','0'))==0)
               <li class="nav-item">
-                <a @class(['active'=> request()->is($row->url), 'nav-link'=>true]) wire:navigate href="{{ url($row->url) }}">
+                <a @class(['active'=> str_contains(request()->route()->uri, strtolower($row->name)) , 'nav-link'=>true]) wire:navigate href="{{ url($row->url) }}">
                   <i class="{{ $row->icon }}"></i>
                   {{ $row->translate ? __($row->translate) : $row->name }} 
                 </a>
@@ -58,7 +58,7 @@
 
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <li>
-                <a class="dropdown-item" wire:navigate href="{{ url('system/profile') }}">
+                <a class="dropdown-item" wire:navigate href="{{ url('account/profile') }}">
                   <i class="bi bi-person-fill-gear"></i>
                   {{ Auth::user()->name }} 
                 </a>

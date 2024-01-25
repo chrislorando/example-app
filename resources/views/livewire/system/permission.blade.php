@@ -63,7 +63,7 @@
                                 <th scope="row" class="text-center">{{ $count }}</th>
                                 <td class="text-nowrap text-center">
                                     @can($authorization['delete'])
-                                        <button type="button" class="btn btn-sm btn-danger" title="{{ __('label.delete') }}" wire:loading.attr="disabled" wire:click="delete({{ $row->id }})" wire:confirm="This will affect your access to the system. Are you sure want to delete {{$row->name}} ?"><i class="bi bi-trash3-fill"></i></button>
+                                        <button type="button" class="btn btn-sm btn-danger" title="{{ __('label.delete') }}" wire:loading.attr="disabled" wire:click="delete({{ $row->id }})" wire:confirm="{{ __('confirm.delete', ['name' => $row->name]) }}"><i class="bi bi-trash3-fill"></i></button>
                                     @endcan
                                     @can($authorization['edit'])
                                         <button type="button" class="btn btn-warning btn-sm" title="{{ __('label.edit') }}" wire:loading.attr="disabled" wire:click="edit({{ $row->id }})"><i class="bi bi-pencil-square"></i></button>

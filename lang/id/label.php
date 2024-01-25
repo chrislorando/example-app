@@ -75,5 +75,6 @@
   'password' => 'Kata Sandi',
   'already_register' => 'Sudah Terdaftar?',
   'profile' => 'Profil',
+  'account' => 'Akun',
 ];
 
