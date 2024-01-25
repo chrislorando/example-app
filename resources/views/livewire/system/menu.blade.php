@@ -130,12 +130,12 @@
                         <form class="row g-3 needs-validation" novalidate>  
                           
                             <div class="mb-3">
-                                <label for="sequence" class="form-label">{{ __('label.sequence') }}</label>
+                                <label for="sequence" class="form-label">{{ __('validation.attributes.sequence') }}</label>
                                 <x-input.input-text type="text" id="sequence" name="sequence" placeholder="1" wire:model="sequence" />
                             </div>
 
                             <div class="mb-3">
-                                <label for="icon" class="form-label">{{ __('label.icon') }}</label>
+                                <label for="icon" class="form-label">{{ __('validation.attributes.icon') }}</label>
 
                                 <div class="input-group">
                                     <x-input.input-text type="text" id="icon" name="icon" placeholder="bi bi-arrow-clockwise" wire:model.live="icon" /> 
@@ -146,27 +146,27 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="parent_id" class="form-label">{{ __('label.group') }}</label>
+                                <label for="parent_id" class="form-label">{{ __('validation.attributes.group') }}</label>
                                 <x-input.input-select :data="$optionsMenu" id="parent_id" name="parent_id" placeholder="{{ __('group') }}" wire:model="parent_id" />
                             </div>
 
                             <div class="mb-3">
-                                <label for="code" class="form-label">{{ __('label.code') }}</label>
+                                <label for="code" class="form-label">{{ __('validation.attributes.code') }}</label>
                                 <x-input.input-text type="text" id="code" name="code" placeholder="B0123" wire:model="code" /> 
                             </div>
 
                             <div class="mb-3">
-                                <label for="name" class="form-label">{{ __('label.name') }}</label>
+                                <label for="name" class="form-label">{{ __('validation.attributes.name') }}</label>
                                 <x-input.input-text type="text" id="name" name="name" placeholder="system.controller.action" wire:model="name" /> 
                             </div>
                             
                             <div class="mb-3">
-                                <label for="translate" class="form-label">{{ __('label.translate') }}</label>
+                                <label for="translate" class="form-label">{{ __('validation.attributes.translate') }}</label>
                                 <x-input.input-text type="text" id="translate" name="translate" placeholder="label.translate" wire:model="translate" />
                             </div>
 
                             <div class="mb-3">
-                                <label for="url" class="form-label">{{ __('label.url') }}</label>
+                                <label for="url" class="form-label">{{ __('validation.attributes.url') }}</label>
                                 <x-input.input-autocomplete type="text" id="url" name="url" placeholder="{{ __('label.type_search') }}" :value="$url" :data="$optionsPermission" wire:model.live="url" />                             
                             </div>
 
@@ -176,7 +176,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="position" class="form-label">{{ __('label.position') }}</label>
+                                <label for="position" class="form-label">{{ __('validation.attributes.position') }}</label>
                                 <x-input.input-select :data="[['value'=>0, 'text'=>'Header'], ['value'=>1, 'text'=>'Sidebar']]" id="position" name="position" placeholder="{{ __('position') }}" wire:model="position" />
                             </div>
 

@@ -8,6 +8,13 @@ use App\Models\Country AS CountryModel;
 
 class Header extends Component
 {
+    public function signout()
+    {
+        \Auth::logout();
+
+        return $this->redirect('/login');
+
+    }
     public function render()
     {
         $models = MenuModel::where('parent_id', null)->where('position', '0')->get();

@@ -111,7 +111,7 @@
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">{{ $isNewRecord ? __('label.create') : __('label.edit') }} {{ __('label.user') }}</h1>
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">{{ $isNewRecord ? __('label.create') : __('label.edit') }} {{ __('label.country') }}</h1>
                        
                         <div class="btn-group" role="group" aria-label="Basic outlined example">
                             <button type="button" class="btn btn-outline-secondary" wire:click="$dispatch('minimize-modal')"><i class="bi bi-fullscreen-exit"></i></button>
@@ -142,7 +142,7 @@
     
                             
                             <div class="mb-3">
-                                <label for="photo_upload" class="form-label">{{ __('label.photo') }}</label>
+                                <label for="photo_upload" class="form-label">{{ __('validation.attributes.photo') }}</label>
                           
                                 <div
                                     x-data="{ uploading: false, progress: 0, }"
@@ -166,12 +166,12 @@
                             </div>
     
                             <div class="mb-3">
-                                <label for="code" class="form-label">{{ __('label.code') }}</label>
+                                <label for="code" class="form-label">{{ __('validation.attributes.code') }}</label>
                                 <x-input.input-text type="text" id="name" name="name" placeholder="en" wire:model="code" /> 
                              
                             </div>
                             <div class="mb-3">
-                                <label for="name" class="form-label">{{ __('label.name') }}</label>
+                                <label for="name" class="form-label">{{ __('validation.attributes.name') }}</label>
                                 <x-input.input-text type="text" id="name" name="name" placeholder="english" wire:model="name" />
                             </div>
     

@@ -11,5 +11,6 @@
   'success_restore' => 'Data has been restored',
   'success_assign_permission' => 'Permission has been assigned',
   'success_remove_permission' => 'Permission has been removed',
+  'done_backup' => 'Finished backing up',
 ];
 

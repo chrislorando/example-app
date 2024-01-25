@@ -1,4 +1,4 @@
-<div id="sidebarMenu" class="main-sidebar offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" aria-labelledby="offcanvasExampleLabel">
+<div id="sidebarMenu" class="main-sidebar offcanvas offcanvas-start d-print-none" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" aria-labelledby="offcanvasExampleLabel">
     <div class="offcanvas-header border-bottom">
       <a wire:navigate href="{{ url('dashboard') }}" class="d-flex align-items-center text-decoration-none px-3">
         {{-- <i class="bi bi-bootstrap-fill h2 px-2 py-1"></i> 

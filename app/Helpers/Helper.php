@@ -79,4 +79,24 @@ class Helper
             echo $output;
         }
     }
+
+    public static function listFile($path) 
+    {
+        $items = scandir($path);
+        $array = [];
+        
+        foreach($items as $item) {
+        
+            if($item != "." AND $item != "..") {
+                if (is_file($path . $item)) {
+                    $array[] = $item;
+                } else {
+                    $array[$item] = self::listFile($path . $item . "/");
+                    
+                }
+            }
+        }
+
+        return $array;
+    }
 }

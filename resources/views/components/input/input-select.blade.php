@@ -1,7 +1,7 @@
 @props(['data'])
 @props(['name'])
 <select class="form-select" {{ $attributes }}>
-    <option selected>- {{ __('Select') }} - </option>
+    <option selected>- {{ __('label.select') }} - </option>
     @foreach($data as $r)
         <option value="{{ $r['value'] }}">{{ __($r['text']) }}</option>
     @endforeach

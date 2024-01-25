@@ -16,9 +16,10 @@ return new class extends Migration
             $table->uuid('uuid')->unique();
             $table->string('locale');
             $table->string('group');
+            $table->string('parent')->nullable();
             $table->string('code');
             $table->string('value');
-            $table->enum('is_deleted', ['0', '1'])->default('0')->comment('0 = nonactive, 1 = active');
+            $table->enum('is_deleted', [0, 1])->default(0)->comment('0 = nonactive, 1 = active');
             $table->timestamps();
             $table->softDeletes();
         });

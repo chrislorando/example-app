@@ -15,8 +15,10 @@ class Translate extends Model
         'uuid',
         'locale',
         'group',
+        'parent',
         'code',
         'value',
+        'is_attributes',
         'is_deleted'
     ];
 

@@ -3,16 +3,19 @@
 @endsection
 
 <div>
-    <div class="d-flex flex-wrap gap-3 pt-2">
-        <div class="">
+    <div class="d-flex flex-wrap pt-2">
+        <div class="grid gap-0 column-gap-3">
             @can($authorization['create'])
                 <button type="button" class="btn btn-primary" wire:loading.attr="disabled" wire:click="create"><i class="bi bi-plus-lg"></i> {{ __('label.create') }}</button>
             @endcan
 
             @can($authorization['publish'])
-                <button type="button" class="btn btn-success" wire:loading.attr="disabled" wire:click="publish"><i class="bi bi-file-earmark-arrow-up-fill"></i> Publish</button>
+                <button type="button" class="btn btn-success" wire:loading.attr="disabled" wire:click="publish"><i class="bi bi-file-earmark-arrow-up-fill"></i> {{ __('label.publish') }}</button>
             @endcan
-            {{-- <button type="button" class="btn btn-primary" wire:loading.attr="disabled" wire:click="consume"><i class="bi bi-plus-lg"></i> Consume</button> --}}
+
+            @can($authorization['backup'])
+                <button type="button" class="btn btn-secondary" wire:loading.attr="disabled" wire:click="backup"><i class="bi bi-database-fill-down"></i> {{ __('label.backup') }}</button>
+            @endcan
             
         </div>
         <div class="ms-auto">
@@ -51,6 +54,7 @@
                         <x-table.table-heading column="" text="label.action" class="text-center" />
                         <x-table.table-heading column="locale" text="label.locale" class="text-center" :sortField="$sortField" :sortDirection="$sortDirection" class="" />
                         <x-table.table-heading column="group" text="label.group" :sortField="$sortField" :sortDirection="$sortDirection" class="" />
+                        <x-table.table-heading column="parent" text="label.parent" :sortField="$sortField" :sortDirection="$sortDirection" class="" />
                         <x-table.table-heading column="code" text="label.code" :sortField="$sortField" :sortDirection="$sortDirection" class="" />
                         <x-table.table-heading column="value" text="label.value" :sortField="$sortField" :sortDirection="$sortDirection" class="" />
                         <x-table.table-heading column="is_deleted" text="label.is_deleted" :sortField="$sortField" :sortDirection="$sortDirection" class="text-center" />
@@ -68,7 +72,7 @@
                                 <th scope="row" class="text-center">{{ $count }}</th>
                                 <td class="text-nowrap text-center">
                                     @can($authorization['delete'])
-                                        <button type="button" class="btn btn-sm btn-danger" title="{{ __('label.delete') }}" wire:loading.attr="disabled" wire:click="delete({{ $row->id }})" wire:confirm="Are you sure want to {{ $row->trashed() ? 'permantly' : '' }} delete {{$row->code}} ?"><i class="bi bi-trash3-fill"></i></button>
+                                        <button type="button" class="btn btn-sm btn-danger" title="{{ __('label.delete') }}" wire:loading.attr="disabled" wire:click="delete({{ $row->id }})" wire:confirm="Are you sure want to {{ $row->trashed() ? 'permantly' : '' }} delete {{ $row->locale.' - '.$row->code }} ?"><i class="bi bi-trash3-fill"></i></button>
                                     @endcan
                                     @can($authorization['restore'])
                                         @if($row->trashed())
@@ -83,6 +87,7 @@
                              
                                 <td>{{ $row->locale }}</td>
                                 <td>{{ $row->group }}</td>
+                                <td>{{ $row->parent }}</td>
                                 <td>{{ $row->code }}</td>
                                 <td>{{ $row->value }}</td>
                                 <td class="text-center">
@@ -114,7 +119,7 @@
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">{{ $isNewRecord ? __('label.create') : __('label.edit') }} {{ __('label.user') }}</h1>
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">{{ $isNewRecord ? __('label.create') : __('label.edit') }} {{ __('label.translate') }}</h1>
                        
                         <div class="btn-group" role="group" aria-label="Basic outlined example">
                             <button type="button" class="btn btn-outline-secondary" wire:click="$dispatch('minimize-modal')"><i class="bi bi-fullscreen-exit"></i></button>
@@ -126,20 +131,27 @@
                         <form class="row g-3 needs-validation" novalidate>  
                           
                             <div class="mb-3">
-                                <label for="locale" class="form-label">{{ __('label.locale') }}</label>
+                                <label for="locale" class="form-label">{{ __('validation.attributes.locale') }}</label>
                                 <x-input.input-select :data="$countries" id="locale" name="locale" placeholder="en" wire:model="locale" />
                             </div>
 
                             <div class="mb-3">
-                                <label for="code" class="form-label">{{ __('label.group') }}</label>
+                                <label for="code" class="form-label">{{ __('validation.attributes.group') }}</label>
                                 <x-input.input-text type="text" id="group" name="group" placeholder="label" wire:model="group" /> 
                             </div>
+
                             <div class="mb-3">
-                                <label for="code" class="form-label">{{ __('label.code') }}</label>
+                                <label for="parent" class="form-label">{{ __('validation.attributes.parent') }}</label>
+                                <x-input.input-text type="text" id="parent" name="parent" placeholder="hello" wire:model="parent" /> 
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="code" class="form-label">{{ __('validation.attributes.code') }}</label>
                                 <x-input.input-text type="text" id="code" name="code" placeholder="hello" wire:model="code" /> 
                             </div>
+                            
                             <div class="mb-3">
-                                <label for="name" class="form-label">{{ __('label.value') }}</label>
+                                <label for="name" class="form-label">{{ __('validation.attributes.value') }}</label>
                                 <x-input.input-text type="text" id="value" name="value" placeholder="halo" wire:model="value" />
                             </div>
     

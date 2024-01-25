@@ -104,7 +104,7 @@
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">{{ $isNewRecord ? __('label.create') : __('label.edit') }} {{ __('label.role') }}</h1>
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">{{ $isNewRecord ? __('label.create') : __('label.edit') }} {{ __('label.permission') }}</h1>
                         <div class="btn-group" role="group" aria-label="Basic outlined example">
                             <button type="button" class="btn btn-outline-secondary" wire:click="$dispatch('minimize-modal')"><i class="bi bi-fullscreen-exit"></i></button>
                             <button type="button" class="btn btn-outline-secondary" wire:click="$dispatch('fullscreen-modal')"><i class="bi bi-fullscreen"></i></button>
@@ -115,32 +115,32 @@
                         <form class="row g-3 needs-validation" novalidate>  
                           
                             <div class="mb-3">
-                                <label for="email" class="form-label">{{ __('label.guard_name') }}</label>
+                                <label for="email" class="form-label">{{ __('validation.attributes.guard_name') }}</label>
                                 <x-input.input-text type="text" id="guard_name" name="guard_name" placeholder="web" wire:model="guard_name" />
                             </div>
 
                             <div class="mb-3">
-                                <label for="name" class="form-label">{{ __('label.name') }}</label>
+                                <label for="name" class="form-label">{{ __('validation.attributes.name') }}</label>
                                 <x-input.input-text type="text" id="name" name="name" placeholder="system.controller.action" wire:model="name" /> 
                             </div>
                             
                             <div class="mb-3">
-                                <label for="controller" class="form-label">{{ __('label.controller') }}</label>
+                                <label for="controller" class="form-label">{{ __('validation.attributes.controller') }}</label>
                                 <x-input.input-text type="text" id="controller" name="controller" placeholder="Default" wire:model="controller" />
                             </div>
 
                             <div class="mb-3">
-                                <label for="action" class="form-label">{{ __('label.action') }}</label>
+                                <label for="action" class="form-label">{{ __('validation.attributes.action') }}</label>
                                 <x-input.input-text type="text" id="action" name="action" placeholder="index" wire:model="action" />
                             </div>
 
                             <div class="mb-3">
-                                <label for="alias" class="form-label">{{ __('label.alias') }}</label>
+                                <label for="alias" class="form-label">{{ __('validation.attributes.alias') }}</label>
                                 <x-input.input-text type="text" id="alias" name="alias" placeholder="default/action" wire:model="alias" />
                             </div>
     
                             <div class="mb-3">
-                                <label for="description" class="form-label">{{ __('label.description') }}</label>
+                                <label for="description" class="form-label">{{ __('validation.attributes.description') }}</label>
                                 <x-input.input-text type="text" id="description" name="description" placeholder="This is admin" wire:model="description" />
                             </div>
 

@@ -1,4 +1,4 @@
-<nav id="mainHeader" class="main-header navbar navbar-expand-lg shadow-sm fixed-top bg-body-tertiary" aria-label="Tenth navbar example">
+<nav id="mainHeader" class="main-header navbar navbar-expand-lg shadow-sm fixed-top bg-body-tertiary d-print-none" aria-label="Tenth navbar example">
   <div class="container-fluid">
 
       <button id="showSidebar" class="offcanvas-toggler nav-link px-3 visually-hidden" type="button" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,44 +44,11 @@
         <ul class="navbar-nav ms-auto">
   
           <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                  <i class="bi bi-translate text-primary"></i>
-              </a>
-
-              <ul class="dropdown-menu dropdown-menu-end">
-                  @foreach($languages as $l)
-                    <li>
-                      <a class="dropdown-item" wire:navigate href="{{ url('/language/'.$l->code) }}">
-                        @if($l->flag)
-                          <img src="{{ asset($l->flag) }}" height="22" width="22" class="pe-1">
-                        @endif
-                        {{ $l->name }}
-                      </a>
-                    </li>
-                  @endforeach
-              </ul>
+              <x-button.button-language :data="$languages" icon="bi bi-translate text-primary" class="dropdown-menu dropdown-menu-end" />
           </li>
 
           <li class="nav-item dropdown">
-            <a id="bd-theme" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-              <i class="bi bi-brightness-high-fill text-warning"></i>
-            </a>
-
-            <ul class="dropdown-menu dropdown-menu-end">
-                <li>
-                  <button type="button" class="dropdown-item" data-bs-theme-value="light" aria-pressed="false">
-                    <i class="bi bi-brightness-high-fill text-warning"></i>
-                    {{ __('label.light') }}
-                  </button>
-                
-                </li>
-                <li>
-                  <button type="button" class="dropdown-item" data-bs-theme-value="dark" aria-pressed="false">
-                    <i class="bi bi-moon-stars-fill me-1"></i>
-                    {{ __('label.dark') }}
-                  </button>
-                </li>
-            </ul>
+            <x-button.button-theme class="dropdown-menu dropdown-menu-end" />
           </li>
 
           <li class="nav-item dropdown">
@@ -91,21 +58,18 @@
 
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <li>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" wire:navigate href="{{ url('system/profile') }}">
+                  <i class="bi bi-person-fill-gear"></i>
                   {{ Auth::user()->name }} 
                 </a>
               </li>
               <li><hr class="dropdown-divider"></li>
               <li>
-                <a class="dropdown-item" href="{{ route('logout') }}"
-                  onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
+                <a class="dropdown-item" href="#" wire:click="signout()">
                   <i class="bi bi-power text-danger"></i>
                     {{ __('label.logout') }}
                 </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                    @csrf
-                </form>
+            
               </li>
             </ul>
             

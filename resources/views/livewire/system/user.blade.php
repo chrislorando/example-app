@@ -146,7 +146,7 @@
     
                             
                             <div class="mb-3">
-                                <label for="photo_upload" class="form-label">{{ __('label.photo') }}</label>
+                                <label for="photo_upload" class="form-label">{{ __('validation.attributes.photo') }}</label>
                           
                                 <div
                                     x-data="{ uploading: false, progress: 0, }"
@@ -170,32 +170,32 @@
                             </div>
     
                             <div class="mb-3">
-                                <label for="name" class="form-label">{{ __('label.full_name') }}</label>
+                                <label for="name" class="form-label">{{ __('validation.attributes.name') }}</label>
                                 <x-input.input-text type="text" id="name" name="name" placeholder="John Doe" wire:model="name" /> 
                              
                             </div>
                             <div class="mb-3">
-                                <label for="email" class="form-label">{{ __('label.email') }}</label>
+                                <label for="email" class="form-label">{{ __('validation.attributes.email') }}</label>
                                 <x-input.input-text type="email" id="email" name="email" placeholder="name@example.com" wire:model="email" />
                             </div>
                             
                             <div class="mb-3">
-                                <label for="username" class="form-label">{{ __('label.username') }}</label>
+                                <label for="username" class="form-label">{{ __('validation.attributes.username') }}</label>
                                 <x-input.input-text type="text" id="username" name="username" placeholder="johndoe" wire:model="username" />
                             </div>
     
                             <div class="mb-3">
-                                <label for="role_id" class="form-label">{{ __('label.role') }}</label>
+                                <label for="role_id" class="form-label">{{ __('validation.attributes.role_id') }}</label>
                                 <x-input.input-select :data="$roles" id="role_id" name="role_id" placeholder="Role" wire:model="role_id" />
                             </div>
     
                             <div class="mb-3">
-                                <label for="password" class="form-label">{{ __('label.password') }}</label>
+                                <label for="password" class="form-label">{{ __('validation.attributes.password') }}</label>
                                 <x-input.input-text type="password" id="password" name="password" placeholder="********" wire:model="password" />
                              
                             </div>
                             <div class="mb-3">
-                                <label for="password_confirmation" class="form-label">{{ __('label.password_confirmation') }}</label>
+                                <label for="password_confirmation" class="form-label">{{ __('validation.attributes.password_confirmation') }}</label>
                                 <x-input.input-text type="password" id="password_confirmation" name="password_confirmation" placeholder="********" wire:model="password_confirmation" />
     
                             </div>

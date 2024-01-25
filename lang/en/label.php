@@ -40,7 +40,6 @@
   'username' => 'Username',
   'password_confirmation' => 'Password Confirmation',
   'full_name' => 'Full Name',
-  'name' => 'Name',
   'is_active' => 'Is Active',
   'is_deleted' => 'Is Deleted',
   'photo' => 'Photo',
@@ -68,6 +67,12 @@
   'logout' => 'Logout',
   'light' => 'Light',
   'dark' => 'Dark',
-  'password' => 'Password',
+  'parent' => 'Parent',
+  'publish' => 'Publish',
+  'name' => 'Name',
+  'select' => 'Select',
+  'backup' => 'Backup',
+  'already_register' => 'Already Register?',
+  'profile' => 'Profile',
 ];
 

@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6 col-lg-4">
-            <div class="card border-dark">
+            <div class="card">
                 {{-- <div class="card-header bg-dark text-white"><i class="bi bi-shield-lock-fill"></i> {{ __('Login') }}</div> --}}
 
                 <div class="card-body">
@@ -19,12 +19,23 @@
                             </div>
                         @endif
 
+                        <ul class="list-inline">
+  
+                            <li class="nav-item dropdown list-inline-item">
+                                <x-button.button-language :data="$languages" icon="bi bi-translate text-primary" class="dropdown-menu" />
+                            </li>
+                  
+                            <li class="nav-item dropdown list-inline-item">
+                                <x-button.button-theme class="dropdown-menu" />
+                            </li>
+                        </ul>
+
                         <div class="mb-3">
-                            <label for="email" class="col-form-label">{{ __('label.email') }}</label>
+                            <label for="username" class="col-form-label">{{ __('validation.attributes.username') }}</label>
 
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" wire:model="email" required autocomplete="email" autofocus>
+                            <input id="username" type="username" class="form-control @error('username') is-invalid @enderror" name="username" wire:model="username" required autocomplete="username" autofocus>
 
-                            @error('email')
+                            @error('username')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ __($message) }}</strong>
                                 </span>
@@ -32,7 +43,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="password" class="col-form-label">{{ __('label.password') }}</label>
+                            <label for="password" class="col-form-label">{{ __('validation.attributes.password') }}</label>
 
                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" wire:model="password" required autocomplete="current-password">
 
@@ -57,12 +68,12 @@
 
                         <div class="mb-0">
                             <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-dark">
+                                <button type="submit" class="btn btn-primary">
                                     <div wire:loading.class="spinner-border spinner-border-sm"></div>
                                     {{ __('label.login') }} 
                                 </button>
 
-                                <a wire:navigate href="{{ route('register') }}" class="btn btn-outline-dark">
+                                <a wire:navigate href="{{ route('register') }}" class="btn btn-outline-primary">
                                     {{ __('label.register') }} 
                                 </a>
 
@@ -71,15 +82,7 @@
                                         {{ __('label.forgot_password') }}
                                     </a>
                                 @endif
-
-                                {{-- <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <i class="bi bi-translate text-primary"></i>
-                                </a>
-        
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" wire:navigate href="{{ url('/language/en') }}">English</a></li>
-                                    <li><a class="dropdown-item" wire:navigate href="{{ url('/language/id') }}">Indonesia</a></li>
-                                </ul> --}}
+                            
                             </div>
                         </div>
                     </form>

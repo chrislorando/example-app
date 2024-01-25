@@ -18,7 +18,7 @@ class MenuSeeder extends Seeder
         $data = [
             ['id'=>1, 'parent_id'=> null ,'uuid'=>Str::uuid(), 'sequence'=>1, 'icon'=>'bi bi-speedometer' ,'name'=>'Dashboard', 'translate'=>'label.dashboard', 'url'=>'dashboard', 'position'=>'0', 'description'=>'This is dashboard page'],
 
-            ['id'=>2, 'parent_id'=> null, 'uuid'=>Str::uuid(), 'sequence'=>2, 'icon'=>'bi bi-windows', 'name'=>'System', 'translate'=> null, 'url'=>'system', 'position'=>'0', 'description'=>'This is system'],
+            ['id'=>2, 'parent_id'=> null, 'uuid'=>Str::uuid(), 'sequence'=>2, 'icon'=>'bi bi-windows', 'name'=>'System', 'translate'=> 'label.system', 'url'=>'system/permission', 'position'=>'0', 'description'=>'This is system'],
             ['id'=>3, 'parent_id'=> 2, 'uuid'=>Str::uuid(), 'sequence'=>1, 'icon'=>'bi bi-shield-fill', 'name'=>'Permission', 'translate'=>'label.permission', 'url'=>'system/permission', 'position'=>'1', 'description'=>'This is permission page'],
             ['id'=>4, 'parent_id'=> 2, 'uuid'=>Str::uuid(), 'sequence'=>2, 'icon'=>'bi bi-diagram-3-fill', 'name'=>'Role', 'translate'=>'label.role', 'url'=>'system/role', 'position'=>'1', 'description'=>'This is role page'],
             ['id'=>5, 'parent_id'=> 2, 'uuid'=>Str::uuid(), 'sequence'=>3, 'icon'=>'bi bi-person-fill', 'name'=>'User', 'translate'=>'label.user', 'url'=>'system/user', 'position'=>'1', 'description'=>'This is user page'],

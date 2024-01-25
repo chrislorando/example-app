@@ -125,22 +125,22 @@
                         <form class="row g-3 needs-validation" novalidate>  
                           
                             <div class="mb-3">
-                                <label for="name" class="form-label">{{ __('label.name') }}</label>
+                                <label for="name" class="form-label">{{ __('validation.attributes.name') }}</label>
                                 <x-input.input-text type="text" id="name" name="name" placeholder="admin" wire:model="name" /> 
                              
                             </div>
                             <div class="mb-3">
-                                <label for="email" class="form-label">{{ __('label.guard_name') }}</label>
+                                <label for="email" class="form-label">{{ __('validation.attributes.guard_name') }}</label>
                                 <x-input.input-text type="text" id="guard_name" name="guard_name" placeholder="web" wire:model="guard_name" />
                             </div>
                             
                             <div class="mb-3">
-                                <label for="redirect" class="form-label">{{ __('label.redirect') }}</label>
+                                <label for="redirect" class="form-label">{{ __('validation.attributes.redirect') }}</label>
                                 <x-input.input-text type="text" id="redirect" name="redirect" placeholder="/home" wire:model="redirect" />
                             </div>
     
                             <div class="mb-3">
-                                <label for="description" class="form-label">{{ __('label.description') }}</label>
+                                <label for="description" class="form-label">{{ __('validation.attributes.description') }}</label>
                                 <x-input.input-text type="text" id="description" name="description" placeholder="This is admin" wire:model="description" />
                             </div>
     
@@ -149,7 +149,7 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="{{ $is_public==1 ? 0 : 1 }}" id="is_public" wire:model="is_public" {{ $is_public==1 ? 'checked' : '' }}>
                                     <label class="form-check-label" for="is_public">
-                                        {{ __('label.is_public') }}
+                                        {{ __('validation.attributes.is_public') }}
                                     </label>
                                     @error('is_public')
                                         <span class="text-danger">

@@ -11,5 +11,6 @@
   'success_restore' => 'Data berhasil dipulihkan',
   'success_assign_permission' => 'Izin telah diberikan',
   'success_remove_permission' => 'Izin telah dihapus',
+  'done_backup' => 'Selesai dicadangkan',
 ];
 

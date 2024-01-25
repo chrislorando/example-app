@@ -40,7 +40,8 @@ class Translate extends Component
         'update'=>'system.translate.update',
         'delete'=>'system.translate.delete',
         'restore'=>'system.translate.restore',
-        'publish'=>'system.translate.publish'
+        'publish'=>'system.translate.publish',
+        'backup'=>'system.translate.backup'
     ];
 
 
@@ -55,6 +56,8 @@ class Translate extends Component
     public $locale;
 
     public $group;
+
+    public $parent;
 
     public $code;
 
@@ -71,6 +74,7 @@ class Translate extends Component
                 'min:2',
                 Rule::unique('translates')->where(function ($query) {
                     return $query->where('locale', $this->locale)
+                        ->where('group', $this->group)
                        ->where('value', $this->code);
                 })->ignore($this->id)
             ],
@@ -123,6 +127,7 @@ class Translate extends Component
             'uuid'=> Str::uuid(),
             'locale'=> $this->locale,
             'group'=> $this->group,
+            'parent'=> $this->parent,
             'code'=> $this->code,
             'value'=> $this->value,
         ];
@@ -158,6 +163,7 @@ class Translate extends Component
         $this->uuid = $model->uuid;
         $this->locale = $model->locale;
         $this->group = $model->group;
+        $this->parent = $model->parent;
         $this->code = $model->code;
         $this->value = $model->value;
         $this->is_deleted = $model->is_deleted;
@@ -172,6 +178,7 @@ class Translate extends Component
         $data = [
             'locale'=> $this->locale,
             'group'=> $this->group,
+            'parent'=> $this->parent,
             'code'=> $this->code,
             'value'=> $this->value, 
         ];
@@ -227,7 +234,12 @@ class Translate extends Component
         $translates = TranslateModel::get();
 
         foreach($translates as $translate){
-            $array[$translate->locale][$translate->group][$translate->code] = $translate->value;
+            if($translate->parent==null){
+                $array[$translate->locale][$translate->group][$translate->code] = $translate->value;
+            }else{
+                $array[$translate->locale][$translate->group][$translate->parent][$translate->code] = $translate->value;
+            }
+           
         }
 
         foreach($array as $key=>$row){
@@ -249,45 +261,59 @@ class Translate extends Component
         session()->flash('message', __('message.published'));
     }
     
-    // public function consume(){
+    public function backup()
+    {
+        $path = base_path() . '/lang/';
 
-    //     $locale = 'id';
-    //     $group = 'validation';
+        $data = Helper::listFile($path);
+        
+        $array = [];
+        foreach($data as $locales=>$groups){
+            if(is_countable($groups)){
+                foreach($groups as $locale=>$group){
+                    $langFile = str_replace(".php", "", $group);
+                    $strarray = include(base_path()."/lang/".$locales.'/'.$group);
+                    foreach($strarray as $key=>$row){
+                        if(is_countable($row)){
+                            foreach($row as $k=>$r){
+                                $uuid = Str::uuid()->toString();
+                                $isExists = TranslateModel::where('locale',$locales)->where('group',$langFile)->where('code',$k)->count();
+                                if($isExists <= 0){
+                                    $array[] = [
+                                        'uuid'=> $uuid,
+                                        'locale'=> $locales,
+                                        'group'=> $langFile,
+                                        'parent'=>$key,
+                                        'code'=> $k,
+                                        'value'=> $r,
+                                    ];
+                                }
+                             
+                            }
+                        }else{
+                            $uuid = Str::uuid()->toString();
+                            $isExists = TranslateModel::where('locale',$locales)->where('group',$langFile)->where('code',$key)->count();
+                            if($isExists <= 0){
+                                $array[] = [
+                                    'uuid'=> $uuid,
+                                    'locale'=> $locales,
+                                    'group'=> $langFile,
+                                    'parent'=> null,
+                                    'code'=> $key,
+                                    'value'=>$row,
+                                ];
+                            }
+                        
+                        }
+                    }
+                }
+            }         
+        }
 
-    //     $strarray = include(base_path() . '/lang/'.$locale.'/'.$group.'.php');
-    //     $array = [];
-    //     foreach($strarray as $key=>$row){
+        TranslateModel::insert($array);
 
-    //         if(is_countable($row)){
-    //             foreach($row as $k=>$r){
-    //                 $isExists = TranslateModel::where('locale',$locale)->where('code',$key.'_'.$k)->count();
-    //                 if($isExists <= 0){
-    //                     $array[] = [
-    //                         'uuid'=> Str::uuid(),
-    //                         'locale'=> $locale,
-    //                         'group'=> $group,
-    //                         'code'=> $key.'_'.$k,
-    //                         'value'=> $r,
-    //                     ];
-    //                 }
-                 
-    //             }
-    //         }else{
-    //             $isExists = TranslateModel::where('locale',$locale)->where('code',$key)->count();
-    //             if($isExists <= 0){
-    //                 $array[] = [
-    //                     'uuid'=> Str::uuid(),
-    //                     'locale'=> $locale,
-    //                     'group'=> $group,
-    //                     'code'=> $key,
-    //                     'value'=>$row,
-    //                 ];
-    //             }
-            
-    //         }
-    //     }
-    //     TranslateModel::insert($array);
-    // }
+        session()->flash('message', __('message.done_backup'));
+    }
 
     public function search()
     {
@@ -305,6 +331,7 @@ class Translate extends Component
         $translates->where(function ($query) {
             $query->where('locale','like', '%' . $this->q . '%')
             ->orWhere('group','like', '%' . $this->q . '%')
+            ->orWhere('parent','like', '%' . $this->q . '%')
             ->orWhere('code','like', '%' . $this->q . '%')
             ->orWhere('value','like', '%' . $this->q . '%');
         });

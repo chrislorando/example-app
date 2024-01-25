@@ -1,4 +1,4 @@
-<nav aria-label="breadcrumb">
+<nav aria-label="breadcrumb" class="d-print-none">
     <ol class="breadcrumb">
         <li class="breadcrumb-item" aria-current="page"><a wire:navigate href="{{ url('dashboard') }}">{{ __('label.home') }}</a></li>
         @php($route = "")

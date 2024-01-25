@@ -6,12 +6,16 @@ use App\Models\User;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
-
+use App\Models\Country AS CountryModel;
 class Login extends Component
 {
+    // #[Rule("required")]
+    // #[Rule("min:4")]
+    // public $email;
+
     #[Rule("required")]
     #[Rule("min:4")]
-    public $email;
+    public $username;
 
     #[Rule("required")]
     #[Rule("min:6")]
@@ -30,20 +34,23 @@ class Login extends Component
         // }
 
         if (\Auth::attemptWhen([
-            'email' => $this->email, 'password' => $this->password
+            'username' => $this->username, 'password' => $this->password
         ], function (User $user) {
             return $user->isNotBanned();
         })) {
-            session()->flash('message', "You are Login successful.");
+            session()->flash('message', __('auth.success'));
             return $this->redirect('dashboard');
         }else{
-            session()->flash('error', 'Email or password is incorrect.');
+            session()->flash('error', __('auth.failed'));
         }
     }
 
     #[Layout('components.layouts.auth')]
     public function render()
     {
-        return view('livewire.auth.login');
+        $languages = CountryModel::get();
+        return view('livewire.auth.login', [
+            'languages' => $languages,
+        ]);
     }
 }

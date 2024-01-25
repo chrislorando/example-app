@@ -18,7 +18,6 @@ class Country extends Component
     use WithFileUploads;
 
     public $layout = "components.layouts.app";
-
     public $view = "livewire.system.country";
     public $pageTitle = "label.country";
 

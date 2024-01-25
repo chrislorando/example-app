@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('alias')->nullable();
             $table->string('class_path')->nullable();
             $table->text('description')->nullable()->comment('Custom content or get description from menus table for android');
+            $table->tinyInteger('type')->default(0)->comment('0 = backend, 1 = android, 3 = gis');
             $table->timestamps();
 
         });
@@ -34,8 +35,10 @@ return new class extends Migration
             $table->string('guard_name', 50);
             $table->string('redirect')->nullable();
             $table->string('description')->nullable();
-            $table->tinyInteger('is_public')->default('0')->comment('0 = private, 1 = public');
-            $table->tinyInteger('is_deleted')->default('0')->comment('0 = nonactive, 1 = active');
+            $table->integer('rating')->default(0);
+            $table->tinyInteger('type')->default(0)->comment('0 = backend, 1 = android, 3 = gis');
+            $table->tinyInteger('is_public')->default(0)->comment('0 = private, 1 = public');
+            $table->tinyInteger('is_deleted')->default(0)->comment('0 = nonactive, 1 = active');
             $table->timestamps();
             $table->softDeletes();
         });

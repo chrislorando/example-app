@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-bs-theme="light">
+<html lang="{{ app()->getLocale() }}" data-bs-theme="light">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -192,24 +192,12 @@
         showOffCanvas(true);
       })
     }
-   
-
- 
-    // const myOffcanvas = document.getElementById('sidebarMenu');
-    // myOffcanvas.addEventListener('hide.bs.offcanvas', event => {
-
-    // });
-
-    // myOffcanvas.addEventListener('shown.bs.offcanvas', event => {
- 
-    // });
 
   })
 })()
 
 
    window.addEventListener("resize", function() {
-    // const myOffcanvas = document.getElementById('sidebarMenu');
     
     const mq768 = window.matchMedia( "(max-width: 768px)" );
     if (mq768.matches) {
@@ -220,7 +208,6 @@
       document.getElementById('mainContent').classList.add('full-expand');
       document.getElementById('mainFooter').classList.add('full-expand');
       document.getElementById('showSidebar').classList.remove('visually-hidden');
-      // showOffCanvas(false);
     } else {
       document.getElementById('sidebarMenu').classList.add('show');
       document.getElementById('sidebarMenu').classList.remove('full-sidebar');
@@ -228,15 +215,7 @@
       document.getElementById('mainContent').classList.remove('full-expand');
       document.getElementById('mainFooter').classList.remove('full-expand');
       document.getElementById('showSidebar').classList.add('visually-hidden');
-      // showOffCanvas(true);
     }
-
-    // const mq430 = window.matchMedia( "(max-width: 430px)" );
-    // if (mq430.matches) {
-    //   document.getElementById('sidebarMenu').classList.add('full-sidebar');
-    // } else {
-    //   document.getElementById('sidebarMenu').classList.remove('full-sidebar');
-    // }
   
   });
 
@@ -261,7 +240,6 @@
           document.getElementById('backdrop').classList.remove('modal-backdrop','fade','show');
           var div = document.getElementById('backdrop');
           if (div) {
-              // div.parentNode.removeChild(div);
               div.remove();
           }
        });
