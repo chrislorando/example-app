@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('12345678'),
             'email_verified_at' => now(),
             'is_deleted' => '0',
-            'photo'=>'/storage/photos/admin.jpg'
+            'photo'=> null
         ]);
 
         User::create([

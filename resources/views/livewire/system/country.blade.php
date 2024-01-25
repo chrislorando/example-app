@@ -205,23 +205,8 @@
 
     
         @if(session()->has('message') || session()->has('error'))
-        <div class="toast-container position-fixed bottom-0 end-0 p-3">
-            <div id="liveToast" @class(['toast show text-bg-success'=> session()->has('message'), 'toast show text-bg-danger'=> session()->has('error')]) role="alert" aria-live="assertive" aria-atomic="true">
-              <div class="toast-header">
-                <strong class="me-auto">{{ __('label.message') }}</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-              </div>
-              <div class="toast-body">
-                @if (session()->has('message'))
-                    {{ session('message') }}
-                @endif
-                @if (session()->has('error'))
-                    {{ session('error') }}
-                @endif
-              </div>
-            </div>
-          </div>
-          @endif
+            <x-toast.alert />
+        @endif
     
     </div>
 </div>
