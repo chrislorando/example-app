@@ -59,6 +59,8 @@ class Menu extends Component
 
     public $url;
 
+    public $url_q;
+
     public $description;
 
     public $position;
@@ -287,15 +289,15 @@ class Menu extends Component
         }
 
         $optionsPermission = [];
-        if($this->url){
-            $modelPermission = PermissionModel::select("*")->when($this->url!="", function ($query)  {
+        if($this->url_q){
+            $modelPermission = PermissionModel::select("*")->when($this->url_q!="", function ($query)  {
                 $query->whereNotNull('alias');
                 $query->where(function($query){
                     $query
-                    ->orWhere('name','like', '%' . $this->url . '%')
-                    ->orWhere('controller','like', '%' . $this->url . '%')
-                    ->orWhere('action','like', '%' . $this->url . '%')
-                    ->orWhere('alias','like', '%' . $this->url . '%');
+                    ->orWhere('name','like', '%' . $this->url_q . '%')
+                    ->orWhere('controller','like', '%' . $this->url_q . '%')
+                    ->orWhere('action','like', '%' . $this->url_q . '%')
+                    ->orWhere('alias','like', '%' . $this->url_q . '%');
                 });
             })
             ->limit(10)
@@ -303,7 +305,7 @@ class Menu extends Component
 
             foreach($modelPermission as $r){
                 $optionsPermission[] = [
-                    'value'=> $r->id,
+                    'value'=> $r->alias,
                     'text'=> $r->alias
                 ];
             }

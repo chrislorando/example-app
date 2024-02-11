@@ -15,8 +15,8 @@ class CountrySeeder extends Seeder
     public function run(): void
     {
         $data = [
-            ['id'=>1, 'uuid'=>Str::uuid(), 'code'=>'id' ,'name'=>'Indonesia'],
-            ['id'=>2, 'uuid'=>Str::uuid(), 'code'=>'en', 'name'=>'English'],
+            ['id'=>1, 'uuid'=>Str::uuid(), 'code'=>'id' ,'name'=>'Indonesia', 'flag'=>'storage/photos/country/indonesia.png'],
+            ['id'=>2, 'uuid'=>Str::uuid(), 'code'=>'en', 'name'=>'English', 'flag'=>'storage/photos/country/english.png'],
         ];
         
         

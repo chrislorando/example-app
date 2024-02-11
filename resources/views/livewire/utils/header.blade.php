@@ -58,7 +58,7 @@
 
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <li>
-                <a class="dropdown-item" wire:navigate href="{{ url('account/profile') }}">
+                <a class="dropdown-item" wire:navigate href="{{ url('account') }}">
                   <i class="bi bi-person-fill-gear"></i>
                   {{ Auth::user()->name }} 
                 </a>

@@ -133,6 +133,23 @@ class Profile extends Component
         }
     }
 
+    public function deletePhoto(UserModel $model)
+    {
+        $this->authorize($this->authorization['deletePhoto']);
+
+        if($model){
+            Helper::deleteFile($model->photo, 'photos');
+            $this->photo = "";
+            $model->photo = "";
+            $model->save();
+        }
+
+        if($this->photo_upload){
+            $this->photo_upload = null;
+        }
+        
+    }
+
     public function render()
     {
         $this->authorize($this->authorization['index']);

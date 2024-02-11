@@ -81,6 +81,8 @@
                                 <td class="text-center">
                                     @if($row->photo)
                                         <img src="{{ asset($row->photo) }}" style="width: 50px;" class="rounded" alt="{{ $row->username }}">
+                                    @else
+                                        <i class="bi bi-person-bounding-box display-5"></i>
                                     @endif
                                 </td>
                                 <td>{{ $row->username }}</td>
@@ -126,22 +128,28 @@
                     <div class="modal-body">
                         <form class="row g-3 needs-validation" novalidate>  
                             @if ($photo_upload || $photo) 
-                            <div class="d-flex flex-column">
-                                <div class="p-2">
-                                    @if ($photo_upload) 
-                                        <img src="{{ $photo_upload->temporaryUrl() }}" class="rounded img-thumbnail mx-auto d-block" style="width: 150px;" alt="Avatar" >
-                                    @elseif ($photo) 
-                                        <img src="{{ asset($photo) }}" class="rounded img-thumbnail mx-auto d-block" style="width: 150px;" alt="Avatar" >
-                                    @endif
+                                <div class="d-flex flex-column">
+                                    <div class="p-2">
+                                        @if ($photo_upload) 
+                                            <img src="{{ $photo_upload->temporaryUrl() }}" class="rounded img-thumbnail mx-auto d-block" style="width: 150px;" alt="Avatar" >
+                                        @elseif ($photo) 
+                                            <img src="{{ asset($photo) }}" class="rounded img-thumbnail mx-auto d-block" style="width: 150px;" alt="Avatar" >
+                                        @endif
+                                    </div>
+                                    <div class="p-2 text-center">
+                                        @can($authorization['deletePhoto'])
+                                        <a href="#" wire:click.prevent="deletePhoto({{ $id }})" class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover icon-link icon-link-hover" style="--bs-link-hover-color-rgb: 25, 135, 84;"> 
+                                            Remove
+                                        </a>
+                                        @endcan
+                                    </div>
                                 </div>
-                                <div class="p-2 text-center">
-                                    @can($authorization['deletePhoto'])
-                                    <a href="#" wire:click.prevent="deletePhoto({{ $id }})" class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover icon-link icon-link-hover" style="--bs-link-hover-color-rgb: 25, 135, 84;"> 
-                                        Remove
-                                    </a>
-                                    @endcan
+                            @else
+                                <div class="d-flex flex-column text-center">
+                                    <div class="p-2">
+                                        <i class="bi bi-person-bounding-box display-1"></i>
+                                    </div>
                                 </div>
-                            </div>
                             @endif
     
                             

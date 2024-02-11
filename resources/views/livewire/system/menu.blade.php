@@ -167,7 +167,7 @@
 
                             <div class="mb-3">
                                 <label for="url" class="form-label">{{ __('validation.attributes.url') }}</label>
-                                <x-input.input-autocomplete type="text" id="url" name="url" placeholder="{{ __('label.type_search') }}" :value="$url" :data="$optionsPermission" wire:model.live="url" />                             
+                                <x-input.input-autocomplete type="text" id="url" name="url" placeholder="{{ __('label.type_search') }}" :value="$url" :text="$url" :data="$optionsPermission" wire:model.live="url_q" />                             
                             </div>
 
                             <div class="mb-3">

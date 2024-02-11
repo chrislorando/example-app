@@ -30,8 +30,8 @@
               <livewire:utils.breadcrumb />
           </div>
           <div class="container-fluid mt-2">
-            {{-- {{ $slot }} --}}
-            @yield('content', $slot ?? '')
+      
+            {{ $slot }}
 
             @if(session()->has('message') || session()->has('error'))
               <x-toast.alert />
@@ -202,6 +202,7 @@
   });
 
   document.addEventListener('livewire:init', () => {
+  
        Livewire.on('open-modal', (event) => {
           document.body.classList.add("modal-open");
           document.getElementsByTagName('body')[0].style = 'overflow: hidden; padding-right: 15px;';

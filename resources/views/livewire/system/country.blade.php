@@ -89,7 +89,7 @@
                         @endforeach
                     @else
                         <tr>
-                            <td colspan="7" class="text-center">
+                            <td colspan="6" class="text-center">
                                 {{ __('label.data_not_found') }}
                             </td>
                         </tr>
